@@ -75,7 +75,9 @@ class TestSpider(scrapy.Spider):
         verified = response.meta["verified"]
         post_id = response.meta["post_id"]
 
-        review = response.css("main :nth-child(3) div.row p *::text").getall()
+        review = response.css("main :nth-child(3) div.row p *::text, \
+                              main :nth-child(3) div.row ol *::text, \
+                              main :nth-child(3) div.row ul *::text").getall()
         full_review = " ".join([p.strip() for p in review if p.strip()]) 
 
         comments_api = f"https://deshimula.com/Mula/GetComments?postId={post_id}&pageNumber=1"
